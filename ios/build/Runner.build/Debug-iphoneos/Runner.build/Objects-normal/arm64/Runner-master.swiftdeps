@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "da16a59e01188acbe4456200f58bed7eb739f456fb05fb71646bd8117e57b2b6"
+build_start_time: [1667292220, 494156837]
+build_end_time: [1667292220, 538055896]
+inputs:
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Runner/AppDelegate.swift": !private [1645244457, 0]

@@ -1,0 +1,27 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "0821fa78fcce3c2f1f5bf150be317833467403a3f8b561ab1421d2e860b9d3f4"
+build_start_time: [1667291876, 17215013]
+build_end_time: [1667291880, 587819099]
+inputs:
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : [1667290251, 981614828]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : [1667290251, 982560157]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : [1667290251, 983038425]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : [1667290251, 983295202]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : [1667290251, 983947277]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : [1667290251, 981966972]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift"
+  : [1667290251, 981205463]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : [1667290251, 984238624]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : [1667290251, 983654022]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : [1667290251, 982319593]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : [1667290251, 982795715]

@@ -1,0 +1,46 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "f29d029321a5a9b0affd69bfed5635644d560a770bd27c78b5a969220869c5d0"
+build_start_time: [1667291880, 594370841]
+build_end_time: [1667291884, 878960132]
+inputs:
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/AsyncAwait.swift": [1667290252, 56067228]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageDeleteTask.swift"
+  : [1667290252, 51794052]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageGetDownloadURLTask.swift"
+  : [1667290252, 52721500]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageGetMetadataTask.swift"
+  : [1667290252, 55166959]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageListTask.swift"
+  : [1667290252, 55597305]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StoragePath.swift"
+  : [1667290252, 52247524]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTaskState.swift"
+  : [1667290252, 54104089]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTokenAuthorizer.swift"
+  : [1667290252, 54686069]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUpdateMetadataTask.swift"
+  : [1667290252, 53560018]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUtils.swift"
+  : [1667290252, 53140163]
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Result.swift": [1667290252, 50564765]
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Storage.swift": [1667290252, 47547101]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageComponent.swift"
+  : [1667290252, 49786090]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageConstants.swift"
+  : [1667290252, 57345867]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageDownloadTask.swift"
+  : [1667290252, 48967838]
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageError.swift": [1667290252, 58314323]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageListResult.swift"
+  : [1667290252, 49393653]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageMetadata.swift"
+  : [1667290252, 56935787]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageObservableTask.swift"
+  : [1667290252, 48560142]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageReference.swift"
+  : [1667290252, 57802915]
+  "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageTask.swift": [1667290252, 50176143]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageTaskSnapshot.swift"
+  : [1667290252, 48084735]
+  ? "/Users/moritakeikuni/development/flutter_application_insta/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageUploadTask.swift"
+  : [1667290252, 56518554]
