@@ -19,8 +19,9 @@ const FeedPostCommentsPart({ super.key });
               style: numberOfCommentsTextStyle,
             ),
           ),
-          Text("0 時間前", style: timeAgoTextStyle,),
-          
+          Text(
+            "0 時間前", style: timeAgoTextStyle,
+          ),
         ],
       ),
     );
