@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:insta_clone/data_models/post.dart';
 import 'package:insta_clone/utils/constants.dart';
+import 'package:insta_clone/view/feed/components/sub/image_from_url.dart';
 import 'package:insta_clone/view/post/components/post_caption_input_text_field.dart';
 import 'package:insta_clone/view/post/screens/enlarge_image_screen.dart';
 import 'package:insta_clone/view_models/post_view_model.dart';
@@ -11,17 +13,16 @@ import 'hero_image.dart';
 
 class PostCaptionPart extends StatelessWidget {
   final PostCaptionOpenMode from;
-  const PostCaptionPart({super.key, required this.from});
+  final Post? post;
+  const PostCaptionPart({super.key, required this.from, this.post});
 
   @override
   Widget build(BuildContext context) {
-    final postViewModel = Provider.of<PostViewModel>(context);
-
-    final image = (postViewModel.imageFile != null)
-        ? Image.file(postViewModel.imageFile!)
-        : Image.asset("assets/images/no_image.png");
-
     if (from == PostCaptionOpenMode.FROM_POST) {
+      final postViewModel = Provider.of<PostViewModel>(context);
+      final image = (postViewModel.imageFile != null)
+          ? Image.file(postViewModel.imageFile!)
+          : Image.asset("assets/images/no_image.png");
       return ListTile(
         leading: HeroImage(
           image: image,
@@ -32,7 +33,20 @@ class PostCaptionPart extends StatelessWidget {
       );
     } else {
       // TODO
-      return Container();
+      return Column(
+        children: <Widget>[
+          ImageFromUrl(
+            imageUrl: post?.imageUrl,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PostCaptionInputTextField(
+              captionBeforeUpdated: post?.caption,
+              from: from,
+            ),
+          ),
+        ],
+      );
     }
   }
 

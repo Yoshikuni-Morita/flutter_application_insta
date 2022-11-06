@@ -74,4 +74,8 @@ class PostRepository {
       // return dbManager.getPostsByUser(feedUser.userId);
     }
   }
+
+  Future<void> updatePost(Post updatePost) async {
+    return dbManager.updatePost(updatePost);
+  }
 }

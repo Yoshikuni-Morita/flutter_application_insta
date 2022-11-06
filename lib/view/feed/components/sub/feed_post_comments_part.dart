@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:insta_clone/data_models/post.dart';
+import 'package:insta_clone/data_models/user.dart';
 import 'package:insta_clone/generated/l10n.dart';
 import 'package:insta_clone/style.dart';
+import 'package:insta_clone/utils/functions.dart';
+import 'package:insta_clone/view/common/components/comment_rich_text.dart';
 
 class FeedPostCommentsPart extends StatelessWidget {
-const FeedPostCommentsPart({ super.key });
+  final Post post;
+  final User postUser;
+  const FeedPostCommentsPart(
+      {super.key, required this.post, required this.postUser});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          CommentRichText(
+            name: postUser.inAppUserName,
+            text: post.caption,
+          ),
           InkWell(
             onTap: null,
             child: Text(
@@ -20,7 +31,8 @@ const FeedPostCommentsPart({ super.key });
             ),
           ),
           Text(
-            "0 時間前", style: timeAgoTextStyle,
+            createTimeAgoString(post.postDateTime),
+            style: timeAgoTextStyle,
           ),
         ],
       ),

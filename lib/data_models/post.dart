@@ -101,7 +101,7 @@ class Post {
       'locationString': this.locationString,
       'latitube': this.latitube,
       'longitube': this.longitube,
-      'postDateTime': this.postDateTime.toIso8601String(),
+      'postDateTime': this.postDateTime.toUtc().toIso8601String(),
     };
   }
 

@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:insta_clone/generated/l10n.dart';
 import 'package:insta_clone/style.dart';
+import 'package:insta_clone/utils/constants.dart';
+import 'package:insta_clone/view_models/feed_view_model.dart';
 import 'package:insta_clone/view_models/post_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PostCaptionInputTextField extends StatefulWidget {
-  const PostCaptionInputTextField({super.key});
+  final String? captionBeforeUpdated;
+  final PostCaptionOpenMode? from;
+
+  const PostCaptionInputTextField({
+    super.key,
+    this.captionBeforeUpdated,
+    this.from,
+  });
 
   @override
   _PostCaptionInputTextFieldState createState() =>
@@ -18,6 +27,10 @@ class _PostCaptionInputTextFieldState extends State<PostCaptionInputTextField> {
   @override
   void initState() {
     _captionController.addListener(_onCaptionUpdated);
+
+    if (widget.from == PostCaptionOpenMode.FROM_FEED) {
+      _captionController.text = widget.captionBeforeUpdated ?? "";
+    }
     super.initState();
   }
 
@@ -43,9 +56,15 @@ class _PostCaptionInputTextFieldState extends State<PostCaptionInputTextField> {
   }
 
   _onCaptionUpdated() {
-    // テキストフィールドの変更を取得
-    final viewModel = context.read<PostViewModel>();
-    viewModel.caption = _captionController.text;
-    print("caption: ${viewModel.caption}");
+    if (widget.from == PostCaptionOpenMode.FROM_FEED) {
+      final viewModel = context.read<FeedViewModel>();
+      viewModel.caption = _captionController.text;
+      print("caption: ${viewModel.caption}");
+    } else {
+      // テキストフィールドの変更を取得
+      final viewModel = context.read<PostViewModel>();
+      viewModel.caption = _captionController.text;
+      print("caption: ${viewModel.caption}");
+    }
   }
 }
