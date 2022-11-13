@@ -152,6 +152,64 @@ class DatabaseManager {
     await _db.collection("likes").doc(like.likeId).set(like.toMap());
   }
 
+  Future<List<Like>> getLikes(String postId) async {
+    final query = await _db.collection("likes").get();
+    if (query.docs.length == 0) return [];
+
+    var results = <Like>[];
+    await _db
+        .collection("likes")
+        .where("postId", isEqualTo: postId)
+        .orderBy("likeDateTime")
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(Like.fromMap(element.data()));
+      });
+    });
+    return results;
+  }
+
+  Future<void> unLikeIt(Post post, User currentUser) async {
+    final likeRef = await _db
+        .collection("likes")
+        .where("postId", isEqualTo: post.postId)
+        .where("likeUserId", isEqualTo: currentUser.userId)
+        .get();
+    likeRef.docs.forEach((element) async {
+      final ref = _db.collection("likes").doc(element.id);
+      await ref.delete();
+    });
+  }
+
+  Future<void> deletePost(String postId, String imageStorangePath) async {
+    // Post
+    final postRef = _db.collection("posts").doc(postId);
+    await postRef.delete();
+
+    // Comment
+    final commntRef = await _db
+        .collection("comments")
+        .where("postId", isEqualTo: postId)
+        .get();
+    commntRef.docs.forEach((element) async {
+      final ref = _db.collection("comments").doc(element.id);
+      await ref.delete();
+    });
+
+    // Likes
+    final likeRef =
+        await _db.collection("likes").where("postId", isEqualTo: postId).get();
+    likeRef.docs.forEach((element) async {
+      final ref = _db.collection("likes").doc(element.id);
+      await ref.delete();
+    });
+
+    // Storageの画像削除
+    final storageRef = FirebaseStorage.instance.ref().child(imageStorangePath);
+    storageRef.delete();
+  }
+
   // TODO
   // Future<List<Post>> getPostsByUser(String userId) {}
 

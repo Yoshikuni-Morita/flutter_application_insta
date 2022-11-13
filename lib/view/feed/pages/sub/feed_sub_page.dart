@@ -30,17 +30,19 @@ class FeedSubPage extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
-          return (model.posts == null)
-              ? Container()
-              : ListView.builder(
-                  itemCount: model.posts!.length,
-                  itemBuilder: (context, index) {
-                    return FeedPostTile(
-                      feedMode: feedMode,
-                      post: model.posts![index],
-                    );
-                  },
+          return RefreshIndicator(
+            onRefresh: () => model.getPosts(feedMode),
+            child: ListView.builder(
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: model.posts!.length,
+              itemBuilder: (context, index) {
+                return FeedPostTile(
+                  feedMode: feedMode,
+                  post: model.posts![index],
                 );
+              },
+            ),
+          );
         }
       },
     );

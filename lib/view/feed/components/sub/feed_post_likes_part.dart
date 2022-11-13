@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:insta_clone/data_models/like.dart';
 import 'package:insta_clone/data_models/post.dart';
 import 'package:insta_clone/data_models/user.dart';
 import 'package:insta_clone/generated/l10n.dart';
@@ -16,30 +17,47 @@ class FeedPostLikesPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final feedViewModel = context.read<FeedViewModel>();
+
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              IconButton(
-                icon: FaIcon(FontAwesomeIcons.solidHeart),
-                // TODO
-                onPressed: () => _likeIt(context),
-              ),
-              IconButton(
-                icon: FaIcon(FontAwesomeIcons.comment),
-                onPressed: () => _openCommentsScreen(context, post, postUser),
-              ),
-            ],
-          ),
-          Text(
-            "0 ${S.of(context).likes}",
-            style: numberOfLikesTextStyle,
-          ),
-        ],
+      child: FutureBuilder(
+        future: feedViewModel.getLikeResult(post.postId),
+        builder: (context, AsyncSnapshot<LikeResult> snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            final likeResult = snapshot.data!;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    likeResult.isLikedToThisPost
+                    ? IconButton(
+                      icon: FaIcon(FontAwesomeIcons.solidHeart),
+                      onPressed: () => _unLikeIt(context),
+                    )
+                    : IconButton(
+                      icon: FaIcon(FontAwesomeIcons.heart),
+                      onPressed: () => _likeIt(context),
+                    ),
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.comment),
+                      onPressed: () =>
+                          _openCommentsScreen(context, post, postUser),
+                    ),
+                  ],
+                ),
+                Text(
+                  likeResult.likes.length.toString() +  " " + S.of(context).likes,
+                  style: numberOfLikesTextStyle,
+                ),
+              ],
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
@@ -59,5 +77,12 @@ class FeedPostLikesPart extends StatelessWidget {
   _likeIt(BuildContext context) async {
     final feedViewModel = context.read<FeedViewModel>();
     await feedViewModel.likeIt(post);
+  }
+  
+  // todo
+  _unLikeIt(BuildContext context) async {
+    final feedViewModel = context.read<FeedViewModel>();
+    await feedViewModel.unLikeIt(post);
+
   }
 }

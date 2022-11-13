@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LikeResult {
-  final List<Like> like;
+  final List<Like> likes;
   final bool isLikedToThisPost;
 
   LikeResult({
-    required this.like,
+    required this.likes,
     required this.isLikedToThisPost,
   });
 }
