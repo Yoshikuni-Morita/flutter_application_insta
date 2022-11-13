@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insta_clone/data_models/comments.dart';
+import 'package:insta_clone/data_models/like.dart';
 import 'package:insta_clone/data_models/location.dart';
 import 'package:insta_clone/data_models/post.dart';
 import 'package:insta_clone/data_models/user.dart';
@@ -77,5 +79,35 @@ class PostRepository {
 
   Future<void> updatePost(Post updatePost) async {
     return dbManager.updatePost(updatePost);
+  }
+
+  Future<void> postComment(
+      Post post, User commentUser, String commentString) async {
+    final comment = Comment(
+      commentId: Uuid().v1(),
+      postId: post.postId,
+      commentUserId: commentUser.userId,
+      comment: commentString,
+      commentDateTime: DateTime.now(),
+    );
+    await dbManager.postComment(comment);
+  }
+
+  Future<List<Comment>> getComments(String postId) async {
+    return dbManager.getComments(postId);
+  }
+
+  Future<void> deleteComment(String deleteCommentId) async {
+    await dbManager.deleteComment(deleteCommentId);
+  }
+
+  Future<void> likeIt(Post post, User currentUser) async {
+    final like = Like(
+      likeId: Uuid().v1(),
+      postId: post.postId,
+      likeUserId: currentUser.userId,
+      likeDateTime: DateTime.now(),
+    );
+    await dbManager.likeIt(like);
   }
 }

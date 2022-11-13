@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_clone/data_models/comments.dart';
 import 'package:insta_clone/data_models/post.dart';
 import 'package:insta_clone/data_models/user.dart';
 import 'package:insta_clone/models/repositories/post_repository.dart';
@@ -54,6 +55,15 @@ class FeedViewModel extends ChangeNotifier {
     await getPosts(feedMode);
 
     isProcessing = false;
+    notifyListeners();
+  }
+
+  Future<List<Comment>> getComments(String postId) async {
+    return await postRepository.getComments(postId);
+  }
+
+  Future<void> likeIt(Post post) async {
+    await postRepository.likeIt(post, currentUser);
     notifyListeners();
   }
 }

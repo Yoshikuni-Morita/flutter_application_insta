@@ -19,9 +19,11 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final feedViewModel = context.read<FeedViewModel>();
 
+    /*
     Future(
       () => feedViewModel.getPosts(),
     );
+    */
 
     return Scaffold(
       appBar: AppBar(
