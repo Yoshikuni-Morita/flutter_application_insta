@@ -7,6 +7,7 @@ import 'package:insta_clone/data_models/comments.dart';
 import 'package:insta_clone/data_models/like.dart';
 import 'package:insta_clone/data_models/post.dart';
 import 'package:insta_clone/data_models/user.dart';
+import 'package:insta_clone/models/repositories/user_repository.dart';
 
 class DatabaseManager {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -42,6 +43,26 @@ class DatabaseManager {
 
   Future<void> insertPost(Post post) async {
     await _db.collection("posts").doc(post.postId).set(post.toMap());
+  }
+
+  Future<List<Post>> getPostsByUser(String userId) async {
+    final query = await _db.collection("posts").get();
+
+    if (query.docs.length == 0) return [];
+
+    var results = <Post>[];
+
+    await _db
+        .collection("posts")
+        .where("userId", isEqualTo: userId)
+        .orderBy("postDateTime", descending: true)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        results.add(Post.fromMap(element.data()));
+      });
+    });
+    return results;
   }
 
   Future<List<Post>> getPostsMineAndFollowings(String userId) async {
@@ -210,7 +231,138 @@ class DatabaseManager {
     storageRef.delete();
   }
 
-  // TODO
-  // Future<List<Post>> getPostsByUser(String userId) {}
+  Future<List<String>> getFollowerUserIds(String userId) async {
+    final query =
+        await _db.collection("users").doc(userId).collection("followers").get();
+    if (query.docs.length == 0) return [];
+    var userIds = <String>[];
+    query.docs.forEach((id) {
+      userIds.add(id.data()["userId"]);
+    });
+    return userIds;
+  }
 
+  Future<List<User>> getLikesUsers(String postId) async {
+    final query =
+        await _db.collection("likes").where("postId", isEqualTo: postId).get();
+
+    if (query.docs.length == 0) return [];
+
+    var userIds = <String>[];
+
+    query.docs.forEach((id) {
+      userIds.add(id.data()["likeUserId"]);
+    });
+
+    var likesUsers = <User>[];
+
+    await Future.forEach(userIds, (String userId) async {
+      final user = await getUserInfoFromDbById(userId);
+      likesUsers.add(user);
+    });
+    return likesUsers;
+  }
+
+  Future<void> updateProfile(User updateUser) async {
+    final reference = _db.collection("users").doc(updateUser.userId);
+    await reference.update(updateUser.toMap());
+  }
+
+  Future<List<User>> searchUsers(String queryString) async {
+    final query = await _db
+        .collection("users")
+        .orderBy("inAppUserName")
+        .startAt([queryString]).endAt([queryString + "\uf8ff"]).get();
+
+    if (query.docs.length == 0) return [];
+
+    var soughtUsers = <User>[];
+
+    query.docs.forEach((element) {
+      final selectedUser = User.fromMap(element.data());
+      if (selectedUser.userId != UserRepository.currentUser?.userId) {
+        soughtUsers.add(selectedUser);
+      }
+    });
+
+    return soughtUsers;
+  }
+
+  Future<void> follow(User profileUser, User currentUser) async {
+    // CurrentUserにとってのfollowings
+    await _db
+        .collection("users")
+        .doc(currentUser.userId)
+        .collection("followings")
+        .doc(profileUser.userId)
+        .set({"userId": profileUser.userId});
+
+    // profileUserにとってのfollowers
+    await _db
+        .collection("users")
+        .doc(profileUser.userId)
+        .collection("followings")
+        .doc(currentUser.userId)
+        .set({"userId": currentUser.userId});
+  }
+
+  Future<void> unFollow(User profileUser, User currentUser) async {
+    // CurrentUserのfollowingから削除
+    await _db
+        .collection("users")
+        .doc(currentUser.userId)
+        .collection("followings")
+        .doc(profileUser.userId)
+        .delete();
+
+    // profileUserのfollowersから削除
+    await _db
+        .collection("users")
+        .doc(profileUser.userId)
+        .collection("followings")
+        .doc(currentUser.userId)
+        .delete();
+  }
+
+  Future<bool> checkIsFollowing(User profileUser, User currentUser) async {
+    final query = await _db
+        .collection("users")
+        .doc(currentUser.userId)
+        .collection("followings")
+        .get();
+    if (query.docs.length == 0) return false;
+    final checkQuery = await _db
+        .collection("users")
+        .doc(currentUser.userId)
+        .collection("followings")
+        .where("userId", isEqualTo: profileUser.userId)
+        .get();
+    if (checkQuery.docs.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<List<User>> getFollowerUsers(String profileUserId) async {
+    final followerUserIds = await getFollowerUserIds(profileUserId);
+    var followerUsers = <User>[];
+
+    await Future.forEach(followerUserIds, (String followerUserId) async {
+      final user = await getUserInfoFromDbById(followerUserId);
+      followerUsers.add(user);
+    });
+    return followerUsers;
+  }
+
+  Future<List<User>> getFollowingUsers(String profileUserId) async{
+    final followingUserIds = await getFollowingUserIds(profileUserId);
+    var followingUsers = <User>[];
+
+    await Future.forEach(followingUserIds, (String followingUserId) async {
+      final user = await getUserInfoFromDbById(followingUserId);
+      followingUsers.add(user);
+    });
+    return followingUsers;
+  }
 }

@@ -9,10 +9,10 @@ import 'package:insta_clone/view_models/feed_view_model.dart';
 import 'package:provider/provider.dart';
 
 class FeedPage extends StatelessWidget {
-  // final FeedMode feedMode;
+  final FeedMode feedMode;
   const FeedPage({
     super.key,
-    // required this.feedMode,
+    required this.feedMode,
   });
 
   @override
@@ -38,7 +38,7 @@ class FeedPage extends StatelessWidget {
       ),
       body: FeedSubPage(
         feedMode: FeedMode.FROM_FEED,
-        // index: null,
+        index: 0,
       ),
     );
   }

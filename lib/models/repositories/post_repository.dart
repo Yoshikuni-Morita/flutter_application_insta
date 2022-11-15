@@ -67,13 +67,13 @@ class PostRepository {
     await dbManager.insertPost(post);
   }
 
-  Future<List<Post>?> getPosts(FeedMode feedMode, User feedUser) async {
+  Future<List<Post>> getPosts(FeedMode feedMode, User feedUser) async {
     if (feedMode == FeedMode.FROM_FEED) {
       // TODO 自分とフォローしてるやつ
       return dbManager.getPostsMineAndFollowings(feedUser.userId);
     } else {
       // TODO 自分だけ
-      // return dbManager.getPostsByUser(feedUser.userId);
+      return dbManager.getPostsByUser(feedUser.userId);
     }
   }
 

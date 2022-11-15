@@ -26,8 +26,7 @@ const numberOfCommentsTextStyle =
 const timeAgoTextStyle =
     TextStyle(fontFamily: RegularFont, fontSize: 10.0, color: Colors.grey);
 
-const commentNameTextStyle =
-    TextStyle(fontFamily: BoldFont, fontSize: 13.0);
+const commentNameTextStyle = TextStyle(fontFamily: BoldFont, fontSize: 13.0);
 
 const commentContentTextStyle =
     TextStyle(fontFamily: RegularFont, fontSize: 13.0);
@@ -35,3 +34,22 @@ const commentContentTextStyle =
 // comments
 const commentInputTextStyle =
     TextStyle(fontFamily: RegularFont, fontSize: 14.0);
+
+// profile
+const profileRecordScoreTextStyle =
+    TextStyle(fontFamily: BoldFont, fontSize: 20.0);
+const profileRecordTitleTextStyle =
+    TextStyle(fontFamily: RegularFont, fontSize: 14.0);
+
+const changeProfilePhotoTextStyle = TextStyle(
+    fontFamily: RegularFont, fontSize: 18.0, color: Colors.blueAccent);
+
+const editProfileTitleTextStyle =
+    TextStyle(fontFamily: RegularFont, fontSize: 14.0);
+
+const profileBioTextStyle = TextStyle(fontFamily: RegularFont, fontSize: 13.0);
+
+// search
+
+const searchPageAppBarTitleTextStyle =
+    TextStyle(fontFamily: RegularFont, color: Colors.grey);

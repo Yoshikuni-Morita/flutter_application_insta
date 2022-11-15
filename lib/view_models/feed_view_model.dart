@@ -19,7 +19,7 @@ class FeedViewModel extends ChangeNotifier {
   });
 
   bool isProcessing = false;
-  List<Post>? posts = [];
+  List<Post> posts = [];
 
   late User feedUser;
   User get currentUser => UserRepository.currentUser!;
