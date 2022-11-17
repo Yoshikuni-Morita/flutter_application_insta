@@ -23,12 +23,15 @@ class ProfileViewModel extends ChangeNotifier {
 
   List<Post> posts = [];
 
+  List<String> popProfileUserIds = [];
+  String popProfileUserId = "";
+
   void setProfileUser(
     ProfileMode profileMode,
     User? selectedUser,
-    // String? popProfileUserId,
+    String? popProfileUserId,
   ) {
-    // if (popProfileUserId != null) popProfileUserIds.add(popProfileUserId);
+    if (popProfileUserId != null) popProfileUserIds.add(popProfileUserId);
 
     if (profileMode == ProfileMode.MYSELF) {
       profileUser = currentUser;
@@ -112,5 +115,18 @@ class ProfileViewModel extends ChangeNotifier {
     await userRepository.unFollow(profileUser);
     isFollowingProfilingUser = false;
     notifyListeners();
+  }
+
+  void popProfileUser() async {
+
+    if (popProfileUserIds.isNotEmpty) {
+      popProfileUserId = popProfileUserIds.last;
+      popProfileUserIds.removeLast();
+      profileUser = await userRepository.getUserById(popProfileUserId);
+    } else {
+      profileUser = currentUser;
+    }
+
+    getPost();
   }
 }

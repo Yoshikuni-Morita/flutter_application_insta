@@ -6,11 +6,11 @@ import 'package:insta_clone/view/profile/pages/profile_page.dart';
 class ProfileScreen extends StatelessWidget {
   final ProfileMode profileMode;
   final User selectedUser;
-  // final String popProfileUserId;
+  final String popProfileUserId;
 
   const ProfileScreen({
     super.key,
-    // required this.popProfileUserId,
+    required this.popProfileUserId,
     required this.profileMode,
     required this.selectedUser,
   });
@@ -20,6 +20,8 @@ class ProfileScreen extends StatelessWidget {
     return ProfilePage(
       profileMode: profileMode,
       selectedUser: selectedUser,
+      isOpenFromProfileScreen: true,
+      popProfileUserId: popProfileUserId,
     );
   }
 }

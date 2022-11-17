@@ -11,8 +11,14 @@ class WhoCaresMeViewModel extends ChangeNotifier {
 
   User get currentUser => UserRepository.currentUser!;
 
+  WhoCaresMeMode whoCaresMeMode = WhoCaresMeMode.LIKE;
+
   Future<void> getCaresMeUsers(String id, WhoCaresMeMode mode) async {
     caresMeUsers = await userRepository.getCaresMeUsers(id, mode);
     notifyListeners();
+  }
+
+  void rebuildAfterPop(String popProfileUserId) {
+    getCaresMeUsers(popProfileUserId, whoCaresMeMode);
   }
 }

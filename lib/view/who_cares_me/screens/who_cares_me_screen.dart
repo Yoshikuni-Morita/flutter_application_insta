@@ -23,14 +23,14 @@ class WhoCaresMeScreen extends StatelessWidget {
 
     Future(() => whoCaresMeViewModel.getCaresMeUsers(id, mode));
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _titleText(context, mode),
+    return Consumer<WhoCaresMeViewModel>(
+      builder: (_, model, child) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            _titleText(context, model.whoCaresMeMode),
+          ),
         ),
-      ),
-      body: Consumer<WhoCaresMeViewModel>(builder: (_, model, child) {
-        return model.caresMeUsers.isEmpty
+        body: model.caresMeUsers.isEmpty
             ? Container()
             : ListView.builder(
                 itemCount: model.caresMeUsers.length,
@@ -44,8 +44,8 @@ class WhoCaresMeScreen extends StatelessWidget {
                     trailing: null,
                   );
                 },
-              );
-      }),
+              ),
+      ),
     );
   }
 
@@ -76,6 +76,7 @@ class WhoCaresMeScreen extends StatelessWidget {
               ? ProfileMode.MYSELF
               : ProfileMode.OTHER,
           selectedUser: user,
+          popProfileUserId: id,
         ),
       ),
     );
